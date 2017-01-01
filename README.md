@@ -22,7 +22,7 @@ getkasp.py
 	-s <SNP position in the raw target sequence (not the alignment sequence)>
 	-t <target_sequence_ID>
 	-a <altanative allele>
-  -h help
+	-h help
 ```
 
 **Example**
