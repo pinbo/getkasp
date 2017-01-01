@@ -23,10 +23,11 @@ getkasp.py
 	-t <target_sequence_ID>
 	-a <altanative allele>
 	-h help
-```
 
-**Example**
+Example:
+
 ./getkasp.py -i alignment_raw.fa -p . -o primer3008.txt -s 489 -t 2AS -a T
+```
 
 It can be used in Linux (may need to recompile primer3_core for your specific Linux version) and windows 7 (terminal or Cygwin). The INPUT file is an multipe sequence alignment file in fasta format.
 
