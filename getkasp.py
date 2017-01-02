@@ -2,25 +2,25 @@
 # -*- coding: utf-8 -*-
 #
 #  getkasp
-#  
+#
 #  Copyright 2016 Junli Zhang <zhjl86@gmail.com>
-#  
+#
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
 #  (at your option) any later version.
-#  
+#
 #  This program is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
-#  
+#
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
-#  
-#  
+#
+#
 
 ### Imported
 from subprocess import call
@@ -28,11 +28,12 @@ import getopt, sys, os
 
 #########################
 usage="""
-getkasp.py 
+getkasp.py
+	-h print help
 	-i <alignment.fa>
-	-p <getkasp path> 
+	-p <getkasp path>
 	-o <output file name>"
-	-s <SNP site>
+	-s <SNP position in the raw sequence>
 	-t <target_sequence_ID>
 	-a <altanative allele>
 
@@ -114,7 +115,7 @@ for kk in fasta.keys():
 		ids.append(kk)
 
 print "The other groups: ", ids
-	
+
 alignlen = len(fasta[target])
 print "Alignment length: ", alignlen
 
@@ -152,7 +153,7 @@ for i in variation:
 		left_end = snp_site
 		right_end = i
 	if right_end - left_end > product_max - 35: # suppose both primers are 18 bp
-		continue 
+		continue
 	settings = "PRIMER_TASK=generic" + "\n" + \
 	"SEQUENCE_ID=" + target + "-" + str(i) + "\n" + \
 	"SEQUENCE_TEMPLATE=" + seq_template + "\n" + \
@@ -185,7 +186,7 @@ def ReverseComplement(seq):
 	seq1 = 'ATCGTAGCatcgtagc'
 	seq_dict = { seq1[i]:seq1[i+4] for i in range(16) if i < 4 or 8<=i<12 }
 	return "".join([seq_dict[base] for base in reversed(seq)])
-	
+
 # classes
 class Primers(object):
 	"""A primer set designed by Primer3"""
@@ -269,7 +270,7 @@ with open(primer3output) as infile:
 			primerpairs[seqid].right.hairpin = float(line.split("=")[1])
 		elif "PRIMER_RIGHT_0_END_STABILITY" in line:
 			primerpairs[seqid].right.end_stability = float(line.split("=")[1])
-		
+
 
 # write to file
 outfile = open(out, 'w')
