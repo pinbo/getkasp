@@ -95,6 +95,8 @@ outfile = open(out, 'w') # output file
 
 snp_site = snp_site - 1 # 0-based
 
+base = os.path.basename(RawAlignFile)
+snpname = os.path.splitext(base)[0]
 ########################
 # read alignment file
 fasta = {} # dictionary for alignment
@@ -136,7 +138,7 @@ for i in range(alignlen):
 #############
 # loop to write primer3 input for each variation site
 # primer3 inputfile
-primer3input = "primer3.input"
+primer3input = "primer3.input." + snpname
 p3input = open(primer3input, 'w')
 
 seq_template = fasta[target].replace("-","") # remove all gaps
@@ -160,7 +162,7 @@ for i in variation:
 	"PRIMER_PRODUCT_SIZE_RANGE=50-250" + "\n" + \
 	"PRIMER_THERMODYNAMIC_PARAMETERS_PATH=" + getkasp_path + "/bin/primer3_config/"  + "\n" + \
 	"PRIMER_MAX_SIZE=25" + "\n" + \
-	"PRIMER_PAIR_MAX_DIFF_TM=2.0" + "\n" + \
+	"PRIMER_PAIR_MAX_DIFF_TM=6.0" + "\n" + \
 	"PRIMER_FIRST_BASE_INDEX=1" + "\n" + \
 	"PRIMER_LIBERAL_BASE=1" + "\n" + \
 	"PRIMER_NUM_RETURN=5"  + "\n" + \
@@ -173,7 +175,7 @@ for i in variation:
 p3input.close()
 
 # primer3 output file
-primer3output = "primer3.output"
+primer3output = "primer3.output." + snpname
 #p3cmd = primer3_path + " -default_version=2 -p3_settings_file=" + primer3_parameter_path + " -output=" + primer3output + " " + primer3input
 p3cmd = primer3_path + " -default_version=2 -output=" + primer3output + " " + primer3input
 print "Primer3 command 1st time: ", p3cmd
