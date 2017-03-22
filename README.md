@@ -17,7 +17,6 @@ GetKasp use "Primer3" to design primers.
 ```
 getkasp.py 
 	-i <alignment.fa>
-	-p <getkasp path> 
 	-o <output file name>"
 	-s <SNP position in the raw target sequence (not the alignment sequence)>
 	-t <target_sequence_ID>
@@ -26,10 +25,14 @@ getkasp.py
 
 Example:
 
-./getkasp.py -i alignment_raw.fa -p . -o primer3008.txt -s 489 -t 2AS -a T
+./getkasp.py -i alignment_raw.fa -o primer3008.txt -s 489 -t 2AS -a T
 ```
 
 It can be used in Linux (may need to recompile primer3_core for your specific Linux version) and windows 7 (terminal or Cygwin). The INPUT file is an multipe sequence alignment file in fasta format.
+
+# Changes
+- 03/21/2017: removed the option "-p", because now the script can find its poistion directly. So please remove the "-p" option from your command.
+- 03/20/2017: increased the primer Tm difference max to 6 in case none were returned.
 
 # Credits
 I borrowed ideas from the polymarker scripts (https://github.com/TGAC/bioruby-polyploid-tools), a great tool for Genome Specific KASPar design in polyploid species. Thanks to the author of Polymarker.

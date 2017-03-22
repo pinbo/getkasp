@@ -31,7 +31,6 @@ usage="""
 getkasp.py
 	-h print help
 	-i <alignment.fa>
-	-p <getkasp path>
 	-o <output file name>"
 	-s <SNP position in the raw sequence>
 	-t <target_sequence_ID>
@@ -65,8 +64,6 @@ for o, a in opts:
 	elif o in ("-h", "--help"):
 		print usage
 		sys.exit()
-	elif o in ("-p"):
-		getkasp_path = a
 	elif o in ("-o"):
 		out = a
 	elif o in ("-s"):
@@ -79,7 +76,8 @@ for o, a in opts:
 		assert False, "unhandled option"
 
 ########################
-getkasp_path = os.path.expanduser(getkasp_path)
+getkasp_path = os.path.dirname(os.path.realpath(__file__))
+print getkasp_path
 #primer3_path = getkasp_path + "/bin/primer3_core"
 primer3_parameter_path = getkasp_path + "/primer3web_v4_JZ.txt"
 
